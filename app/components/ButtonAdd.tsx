@@ -1,15 +1,38 @@
 "use client";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../context/auth";
 import SectionLinks from "./SectionLinks";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 
 const ButtonAdd = () => {
+  const [inputNome, setInputNome] = useState<string>("");
+  const [inputUrl, setInputUrl] = useState<string>("");
+  const { arr, setArr } = useContext(AuthContext);
+
+  const addInfos = () => {
+    if (inputNome === "" || inputUrl === "") {
+      alert("Preencha todos os campos.");
+      return;
+    }
+    const items = [];
+
+    let url = inputUrl;
+    let primeirasPalavras = inputUrl.substring(0, 8);
+    if (primeirasPalavras != "https://") {
+      url = `https://${url}`;
+    }
+
+    items.push(...arr, [inputNome, url]);
+    setArr(items);
+  };
+
+  // useEffect(() => {}, [arr]);
+
   return (
     <Dialog>
       <DialogTrigger className="text-zinc-700 hover:text-zinc-900">
@@ -24,18 +47,27 @@ const ButtonAdd = () => {
             <span>Nome</span>
             <input
               type="text"
-              className="h-9 p-4 bg-green-200 rounded-xl outline-none"
+              className="h-11 p-4 bg-green-200 rounded-xl outline-none"
+              onChange={(e) => setInputNome(e.target.value)}
             />
           </div>
           <div className="flex flex-col w-full">
             <span>URL</span>
             <input
               type="text"
-              className="h-9 p-4 bg-green-200 rounded-xl outline-none"
+              className="h-11 p-4 bg-green-200 rounded-xl outline-none"
+              onChange={(e) => setInputUrl(e.target.value)}
             />
           </div>
           <div className="w-full text-right mt-5">
-            <button className="p-3 bg-green-400 rounded-xl">Concluir</button>
+            <DialogClose>
+              <button
+                className="p-3 bg-green-400 rounded-xl"
+                onClick={addInfos}
+              >
+                Concluir
+              </button>
+            </DialogClose>
           </div>
         </div>
       </DialogContent>

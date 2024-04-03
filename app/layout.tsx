@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "800"] });
+import AuthProvider from "./context/auth";
 
 export const metadata: Metadata = {
   title: "Add Links Websites",
@@ -16,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className} bg-zinc-950`}>{children}</body>
+      <body className={`${poppins.className} bg-zinc-950`}>
+        <AuthProvider>
+        {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
