@@ -17,10 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className} bg-zinc-950`}>
-        <AuthProvider>
-        {children}
-        </AuthProvider>
+      <body className={`${poppins.className} bg-zinc-500`}>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

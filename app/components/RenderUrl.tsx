@@ -12,8 +12,10 @@ const RenderUrl = () => {
         return (
           <Link href={links[1]} target="_blank">
             <SectionLinks key={links[0]}>
-              <span>
-                {links[0].length > 8 ? `${links[0].substring(0, 6)}...` : links[0]}
+              <span className="text-white font-semibold">
+                {links[0].length > 8
+                  ? `${links[0].substring(0, 6)}...`
+                  : links[0]}
               </span>
             </SectionLinks>
           </Link>

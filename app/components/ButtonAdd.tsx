@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../context/auth";
 import SectionLinks from "./SectionLinks";
 import {
@@ -29,9 +29,9 @@ const ButtonAdd = () => {
 
     items.push(...arr, [inputNome, url]);
     setArr(items);
+    setInputNome("");
+    setInputUrl("");
   };
-
-  // useEffect(() => {}, [arr]);
 
   return (
     <Dialog>
@@ -49,6 +49,7 @@ const ButtonAdd = () => {
               type="text"
               className="h-11 p-4 bg-green-200 rounded-xl outline-none"
               onChange={(e) => setInputNome(e.target.value)}
+              value={inputNome}
             />
           </div>
           <div className="flex flex-col w-full">
@@ -57,6 +58,7 @@ const ButtonAdd = () => {
               type="text"
               className="h-11 p-4 bg-green-200 rounded-xl outline-none"
               onChange={(e) => setInputUrl(e.target.value)}
+              value={inputUrl}
             />
           </div>
           <div className="w-full text-right mt-5">
